@@ -1,0 +1,19 @@
+{
+  "name": "fooders",
+  "version": "1.0.0",
+  "description": "Discover delicious recipes effortlessly with our smart food search platform",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "yashsvi",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.13.3",
+    "parcel": "^2.13.3"
+  },
+  "dependencies": {
+    "sass": "^1.83.4"
+  },
+  "main": "index.js"
+}
