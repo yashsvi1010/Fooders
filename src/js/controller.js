@@ -2,21 +2,13 @@ import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-
-// console.log(icons);
-
-const recipeContainer = document.querySelector(".recipe");
-
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
+import searchView from "./views/searchView.js";
+import resultView from "./views/resultView.js";
 
 ///////////////////////////////////////
-
+if (module.hot) {
+  module.hot.accept();
+}
 //Loading recipe
 
 const controlRecipes = async function () {
@@ -33,14 +25,27 @@ const controlRecipes = async function () {
     //Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    alert(err);
+    recipeView.renderError();
   }
 };
-// showRecipe();
 
-["hashchange", "load"].forEach((ev) =>
-  window.addEventListener(ev, controlRecipes)
-);
+const controlSearchResults = async function () {
+  try {
+    resultView.renderSpinner();
+    //Get search query
+    const query = searchView.getQuery();
+    if (!query) return;
+    //Load search results
+    await model.loadSerachResult(query);
+    //Render results
+    resultView.render(model.state.search.results);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-// window.addEventListener("hashchange", showRecipe);
-// window.addEventListener("load", showRecipe);
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
+};
+init();
