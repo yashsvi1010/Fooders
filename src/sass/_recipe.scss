@@ -10,7 +10,7 @@
     transform-origin: top;
 
     &::before {
-      content: '';
+      content: "";
       display: block;
       height: 100%;
       width: 100%;
@@ -60,6 +60,10 @@
     @media only screen and (max-width: $bp-medium) {
       width: 70%;
     }
+    @media only screen and (max-width: $bp-small) {
+      width: 80%;
+      font-size: 2.5rem;
+    }
   }
 
   ///////////
@@ -67,17 +71,33 @@
   &__details {
     display: flex;
     align-items: center;
-    padding: 7.5rem 8rem 3.5rem 8rem;
+    justify-content: center;
+    padding: 7.5rem 3rem 3.5rem 3rem;
   }
 
+  @media only screen and (max-width: $bp-small) {
+    &__details {
+      padding: 7rem 2rem 3rem 0.5rem;
+    }
+  }
+  @media only screen and (max-width: $bp-custom) {
+    &__details {
+      flex-wrap: wrap;
+    }
+  }
   &__info {
     font-size: 1.65rem;
     text-transform: uppercase;
     display: flex;
     align-items: center;
+    margin: 1rem 0;
 
     &:not(:last-child) {
       margin-right: 4.5rem;
+
+      @media only screen and (max-width: $bp-small) {
+        margin-right: 1rem;
+      }
     }
   }
 
@@ -108,27 +128,32 @@
     height: 4rem;
     width: 4rem;
     border-radius: 10rem;
-
-    margin-left: auto;
-    margin-right: 1.75rem;
+    margin: 1rem auto 1rem 1.75rem;
 
     svg {
       height: 2.25rem;
       width: 2.25rem;
       fill: $color-primary;
     }
+    @media only screen and (max-width: $bp-small) {
+      margin-right: 1.25rem;
+    }
   }
 
   ///////////
   // INGREDIENTS
   &__ingredients {
-    padding: 5rem 8rem;
+    padding: 4rem 5rem 2rem 5rem;
     font-size: 1.6rem;
     line-height: 1.4;
     background-color: $color-grey-light-2;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 3rem 2.5rem;
+    }
   }
 
   &__ingredient-list {
@@ -159,7 +184,7 @@
   ///////////
   // DIRECTIONS
   &__directions {
-    padding: 5rem 10rem;
+    padding: 2rem 5rem;
     padding-bottom: 5rem;
     display: flex;
     flex-direction: column;
@@ -169,7 +194,7 @@
   &__directions-text {
     font-size: 1.7rem;
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
     color: $color-grey-dark-2;
   }
 

@@ -619,13 +619,13 @@ const controlRecipes = async function() {
         const id = window.location.hash.slice(1);
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
-        // 0) Update results view to mark selected search result
+        //Update results view to mark selected search result
         (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
-        // 1) Updating bookmarks view
+        // Updating bookmarks view
         (0, _bookmarksViewJsDefault.default).update(_modelJs.state.bookmarks);
-        // 2) Loading recipe
+        // Loading recipe
         await _modelJs.loadRecipe(id);
-        // 3) Rendering recipe
+        //  Rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
         (0, _recipeViewJsDefault.default).renderError();
@@ -635,23 +635,23 @@ const controlRecipes = async function() {
 const controlSearchResults = async function() {
     try {
         (0, _resultsViewJsDefault.default).renderSpinner();
-        // 1) Get search query
+        // Get search query
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
-        // 2) Load search results
+        // Load search results
         await _modelJs.loadSearchResults(query);
-        // 3) Render results
+        //  Render results
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPage());
-        // 4) Render initial pagination buttons
+        // Render initial pagination buttons
         (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
         console.log(err);
     }
 };
 const controlPagination = function(goToPage) {
-    // 1) Render NEW results
+    // Render NEW results
     (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPage(goToPage));
-    // 2) Render NEW pagination buttons
+    // Render NEW pagination buttons
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
 const controlServings = function(newServings) {
@@ -692,7 +692,7 @@ const controlAddRecipe = async function(newRecipe) {
             (0, _addRecipeViewJsDefault.default).toggleWindow();
         }, (0, _configJs.MODAL_CLOSE_SEC) * 1000);
     } catch (err) {
-        console.error("\uD83D\uDCA5", err);
+        console.error("\uD83C\uDF83", err);
         (0, _addRecipeViewJsDefault.default).renderError(err.message);
     }
 };
@@ -2625,7 +2625,7 @@ const loadRecipe = async function(id) {
         console.log(state.recipe);
     } catch (err) {
         // Temp error handling
-        console.error(`${err} \u{1F4A5}\u{1F4A5}\u{1F4A5}\u{1F4A5}`);
+        console.error(`${err} \u{1F383}\u{1F383}\u{1F383}\u{1F383}`);
         throw err;
     }
 };
@@ -2647,7 +2647,7 @@ const loadSearchResults = async function(query) {
         });
         state.search.page = 1;
     } catch (err) {
-        console.error(`${err} \u{1F4A5}\u{1F4A5}\u{1F4A5}\u{1F4A5}`);
+        console.error(`${err} \u{1F383}\u{1F383}\u{1F383}\u{1F383}`);
         throw err;
     }
 };
@@ -2694,7 +2694,6 @@ const uploadRecipe = async function(newRecipe) {
     try {
         const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("ingredient") && entry[1] !== "").map((ing)=>{
             const ingArr = ing[1].split(",").map((el)=>el.trim());
-            // const ingArr = ing[1].replaceAll(' ', '').split(',');
             if (ingArr.length !== 3) throw new Error("Wrong ingredient fromat! Please use the correct format :)");
             const [quantity, unit, description] = ingArr;
             return {
@@ -2766,47 +2765,13 @@ const AJAX = async function(url, uploadData) {
     } catch (err) {
         throw err;
     }
-}; /*
-export const getJSON = async function (url) {
-  try {
-    const fetchPro = fetch(url);
-    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
 };
-
-export const sendJSON = async function (url, uploadData) {
-  try {
-    const fetchPro = fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(uploadData),
-    });
-
-    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
-*/ 
 
 },{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
-// import icons from '../img/icons.svg'; // Parcel 1
 var _iconsSvg = require("url:../../img/icons.svg"); // Parcel 2
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _fractional = require("fractional");
@@ -2878,11 +2843,13 @@ class RecipeView extends (0, _viewJsDefault.default) {
             <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
           </svg>
         </div>
+        <div class="recipe_bookmark--btn">
         <button class="btn--round btn--bookmark">
           <svg class="">
             <use href="${0, _iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? "-fill" : ""}"></use>
           </svg>
         </button>
+        </div>
       </div>
 
       <div class="recipe__ingredients">
@@ -3399,7 +3366,7 @@ class PaginationView extends (0, _viewJsDefault.default) {
         const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
         // Page 1, and there are other pages
         if (curPage === 1 && numPages > 1) return `
-        <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+        <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next ms-auto">
           <span>Page ${curPage + 1}</span>
           <svg class="search__icon">
             <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
@@ -3423,7 +3390,7 @@ class PaginationView extends (0, _viewJsDefault.default) {
           </svg>
           <span>Page ${curPage - 1}</span>
         </button>
-        <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+        <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next ms-auto">
           <span>Page ${curPage + 1}</span>
           <svg class="search__icon">
             <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>

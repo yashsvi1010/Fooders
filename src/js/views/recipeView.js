@@ -1,6 +1,5 @@
 import View from "./View.js";
 
-// import icons from '../img/icons.svg'; // Parcel 1
 import icons from "url:../../img/icons.svg"; // Parcel 2
 import { Fraction } from "fractional";
 
@@ -85,6 +84,7 @@ class RecipeView extends View {
             <use href="${icons}#icon-user"></use>
           </svg>
         </div>
+        <div class="recipe_bookmark--btn">
         <button class="btn--round btn--bookmark">
           <svg class="">
             <use href="${icons}#icon-bookmark${
@@ -92,6 +92,7 @@ class RecipeView extends View {
     }"></use>
           </svg>
         </button>
+        </div>
       </div>
 
       <div class="recipe__ingredients">

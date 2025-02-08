@@ -10,16 +10,27 @@
     height: 4.6rem;
     display: block;
   }
+
+  @media only screen and (max-width: $bp-small) {
+    // height: 8rem;
+    &__logo {
+      margin-left: 1.5rem;
+    }
+  }
 }
 
 .search {
   background-color: #fff;
   border-radius: 10rem;
-  display: flex;
   align-items: center;
-  padding-left: 3rem;
+  margin-left: 7rem;
+  height: 4rem;
   transition: all 0.3s;
 
+  @media only screen and (max-width: $bp-medium) {
+    justify-content: center;
+    margin: 1rem 3rem;
+  }
   &:focus-within {
     transform: translateY(-2px);
     box-shadow: 0 0.7rem 3rem rgba($color-grey-dark-1, 0.08);
@@ -31,7 +42,7 @@
     font-family: inherit;
     color: inherit;
     font-size: 1.7rem;
-    width: 30rem;
+    // width: 30rem;
 
     &:focus {
       outline: none;
@@ -39,20 +50,24 @@
 
     &::placeholder {
       color: $color-grey-light-3;
-    }
-
-    @media only screen and (max-width: $bp-medium) {
-      width: auto;
-
-      &::placeholder {
-        color: white;
-      }
+      font-size: small;
     }
   }
 
   &__btn {
     font-weight: 600;
     font-family: inherit;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    &__field {
+      // width: 15rem;
+      font-size: 1.2rem;
+    }
+
+    &::placeholder {
+      color: white;
+    }
   }
 }
 

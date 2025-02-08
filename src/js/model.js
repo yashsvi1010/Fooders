@@ -41,7 +41,7 @@ export const loadRecipe = async function (id) {
     console.log(state.recipe);
   } catch (err) {
     // Temp error handling
-    console.error(`${err} 💥💥💥💥`);
+    console.error(`${err} 🎃🎃🎃🎃`);
     throw err;
   }
 };
@@ -64,7 +64,7 @@ export const loadSearchResults = async function (query) {
     });
     state.search.page = 1;
   } catch (err) {
-    console.error(`${err} 💥💥💥💥`);
+    console.error(`${err} 🎃🎃🎃🎃`);
     throw err;
   }
 };
@@ -129,7 +129,6 @@ export const uploadRecipe = async function (newRecipe) {
       .filter((entry) => entry[0].startsWith("ingredient") && entry[1] !== "")
       .map((ing) => {
         const ingArr = ing[1].split(",").map((el) => el.trim());
-        // const ingArr = ing[1].replaceAll(' ', '').split(',');
         if (ingArr.length !== 3)
           throw new Error(
             "Wrong ingredient fromat! Please use the correct format :)"
