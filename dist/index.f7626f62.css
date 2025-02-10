@@ -606,7 +606,7 @@ footer {
   display: flex;
 }
 
-.copyright .twitter-link:link, .copyright .twitter-link:visited {
+.copyright .social-link:link, .copyright .social-link:visited {
   color: #918581;
 }
 
